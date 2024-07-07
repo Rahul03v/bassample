@@ -1,0 +1,110 @@
+<mvc:View
+    controllerName="com.techm.masterdetail.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
+    <Page id="page">
+        <customHeader>
+            <OverflowToolbar>
+                <content>
+                    <ToolbarSpacer />
+                    <Title text="Order Master details" />
+                    <ToolbarSpacer />
+                </content>
+            </OverflowToolbar>
+        </customHeader>
+        <content>
+            <SplitContainer
+                id="SplitCont"
+                initialMaster="master"
+                initialDetail="detail">
+                <detailPages>
+                    <Page
+                        id="detail"
+                        title="orderdetails">
+                        <Table
+                            id="table"
+                            items="{/Order_Details}" growing="true" growingThreshold="20">
+                            <columns>
+                                <Column>
+                                    <Text text="OrderID" />
+                                </Column>
+                                <Column>
+                                    <Text text="ProductID" />
+                                </Column>
+                                <Column>
+                                    <Text text="Unit Price" />
+                                </Column>
+                                <Column>
+                                    <Text text="Quantity" />
+                                </Column>
+                                <Column>
+                                    <Text text="Discount" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem
+                                    type="Navigation"
+                                    press="onPressProd" >
+                                    <cells>
+                                        <Text text="{OrderID}" />
+                                        <Text text="{ProductID}" />
+                                        <Text text="{UnitPrice}" />
+                                        <Text text="{Quantity}" />
+                                        <Text text="{Discount}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                    </Page>
+                    <Page
+                        id="proddetail"
+                        title="product details">
+                        <VBox>
+                            <f:SimpleForm
+                                id="productform" editable="false" layout="ResponsiveGridLayout">
+                                <f:content>
+                                    <Label text="Product Name" />
+                                    <Text text="{/ProductName}" />
+                                    <Label text="SupplierID" />
+                                    <Text text="{/SupplierID}" />
+                                    <Label text="QuantityPerUnit" />
+                                    <Text text="{/QuantityPerUnit}" />
+                                    <Label text="UnitPrice" />
+                                    <Text text="{/UnitPrice}" />
+                                    <Label text="UnitsOnOrder" />
+                                    <Text text="{/UnitsOnOrder}" />
+                                </f:content>
+                            </f:SimpleForm>
+                        </VBox>
+                    </Page>
+                </detailPages>
+                <masterPages>
+                    <Page
+                        id="master"
+                        title="orderlist">
+                        <List
+                            id="olist"
+                            items="{/Orders}" growing="true" growingThreshold="20">
+                            <items>
+                                <!-- <StandardListItem
+                                    title="{OrderID}"
+                                    
+                                    type="Navigation"
+                                    press="onListPress"/> -->
+
+                                <ObjectListItem type="Navigation" title="{ShipCity}" number="{OrderID}" numberUnit="OrderID"
+                                 intro="{ShipCountry}" id="item7" press="onListPress" icon="sap-icon://sales-order">
+                                        <attributes>
+                                            <ObjectAttribute text="{ShipAddress}" id="attribute1"/>
+                                        </attributes>
+                                        </ObjectListItem>
+                            </items>
+                        </List>
+                    </Page>
+                </masterPages>
+            </SplitContainer>
+        </content>
+    </Page>
+</mvc:View>
